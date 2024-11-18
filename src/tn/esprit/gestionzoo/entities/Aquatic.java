@@ -1,6 +1,6 @@
 package tn.esprit.gestionzoo.entities;
 
-public abstract class Aquatic extends Animal {
+public class Aquatic extends Animal implements Carnivore<Food> {
     protected String habitat;
 
     public Aquatic() {
@@ -12,29 +12,24 @@ public abstract class Aquatic extends Animal {
     }
 
     public String getHabitat() {
-        return this.habitat;
+        return habitat;
     }
 
     public void setHabitat(String habitat) {
         this.habitat = habitat;
     }
 
-    // Abstract method swim, to be implemented in subclasses
-    public abstract void swim();
-
     @Override
-    public String toString() {
-        return super.toString() + ", Habitat: " + this.habitat;
+    public void eatMeat(Food meat) {
+        if (meat == Food.MEAT || meat == Food.BOTH) {
+            System.out.println(getName() + " is eating meat.");
+        } else {
+            System.out.println(getName() + " cannot eat " + meat);
+        }
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-
-        Aquatic aquatic = (Aquatic) obj;
-        return this.getName().equals(aquatic.getName()) &&
-                this.getAge() == aquatic.getAge() &&
-                this.getHabitat().equals(aquatic.getHabitat());
+    public String toString() {
+        return super.toString() + ", Habitat: " + habitat;
     }
 }
